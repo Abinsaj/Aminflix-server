@@ -59,5 +59,15 @@ export class Controller{
             res.status(500).json({success: false, message:'An unexpected error occurred'})
         }
     }
+
+    removeFromFavorite = async(req: Request, res: Response)=>{
+        try {
+            const id = req.query.id
+            this.favouriteMovie = this.favouriteMovie.filter(movie=>movie.imdbID !== id)
+            res.status(200).json({ message: "Movie removed from favorites", favouriteMovie: this.favouriteMovie });
+        } catch (error) {
+            res.status(500).json({ message: "Internal server error" });
+        }
+    }
     
 }
